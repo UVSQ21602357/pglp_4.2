@@ -1,6 +1,7 @@
 package uvsq21602357;
 
 import java.util.Scanner;
+import java.util.Stack;
 import java.util.regex.Pattern;
 import uvsq21602357.Calcul;
 
@@ -15,13 +16,13 @@ public class SaisieRPN extends MoteurRPN {
     	this.command.createCommandList(moteurRPN);
     }
 		
-	 public void getInput(){
+	 public void getInput(MoteurRPN moteurRPN){
     	String str = "debut";
 		  int i = 0;
 		  while(i != 1)
 		  {
 			  Scanner sc = new Scanner(System.in);
-			  System.out.println("**Saisir op�rande/op�ration:");
+			  System.out.println("**Saisir opérande/opération:");
 	
 			  
 			 str = sc.nextLine();
@@ -32,31 +33,32 @@ public class SaisieRPN extends MoteurRPN {
 			  else if(str.equals("+") || str.equals("PLUS")) 
 			  { 	
 				  	this.command.setOperation(Operation.PLUS);
-			  		this.command.executerCommande("Calcul");
+			  		this.command.executerCommande("appliquer+");
 			  }
 			  else if(str.equals("-") || str.equals("MOINS")) 
 			  {
 				  this.command.setOperation(Operation.MOINS);
-			      this.command.executerCommande("Calcul");
+			      this.command.executerCommande("appliquer-");
 			  }
 			  else if(str.equals("*") || str.equals("MULT")) 
 			  {
 				  this.command.setOperation(Operation.MULT);
-			      this.command.executerCommande("Calcul");
+			      this.command.executerCommande("appliquer*");
 			  }
 			  else if(str.equals("/") || str.equals("DIV")) 
 			  {
 				  this.command.setOperation(Operation.DIV);
-			      this.command.executerCommande("Calcul");
+			      this.command.executerCommande("appliquer/");
 			  }
-			  else if(str.matches("^-?\\d+$")){
+			  else if(str.matches("[0-9]")){
 				  this.command.setOperande(Double.parseDouble(str));
-			      this.command.executerCommande("Enregistre");
+				  double val = Double.parseDouble(str);
+				  this.command.createCommandEnregistre(moteurRPN, val);
+			      this.command.executerCommande("enregistrer");
 			  }
 			  else {
 			      this.command.executerCommande(str);
 			    }
-			  
 		  }
              
       

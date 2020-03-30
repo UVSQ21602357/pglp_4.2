@@ -3,7 +3,8 @@ package uvsq21602357;
 public enum CalculatriceRPN {
 	;
 	public static void main(String[] args) {
-   	 SaisieRPN scanner = new SaisieRPN();
-   
+	MoteurRPN moteurRPN = new MoteurRPN();
+   	SaisieRPN scanner = new SaisieRPN(moteurRPN);
+   	scanner.getInput(moteurRPN);
    }
 }

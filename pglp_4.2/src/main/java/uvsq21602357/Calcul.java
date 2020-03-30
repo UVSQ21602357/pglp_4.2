@@ -31,7 +31,7 @@ public class Calcul {
 	   */
 	  public void setOperande(Double operande){
 	    Enregistrer Enregistre;
-	    if(this.commandes.containsKey("save")){
+	    if(this.commandes.containsKey("Enregistre")){
 	      Enregistre = (Enregistrer) this.commandes.get("Enregistre");
 	      Enregistre.setOperand(operande);
 	    }
@@ -45,7 +45,7 @@ public class Calcul {
 	    if(this.commandes.containsKey("apply")){
 	      appliquer = (Appliquer) this.commandes.get("apply");
 	      appliquer.setOperation(operation);
-	    }
+	   }
 	  }
 
 	  /**
@@ -53,8 +53,14 @@ public class Calcul {
 	   */
 	  public void executerCommande(String name){
 	    if(this.commandes.containsKey(name)){
-	      this.commandes.get(name).execution();
-	      System.out.println(this.MoteurRPN.returnRPN());
+	    	if(name.equals("enregistrer")) {
+	    		this.commandes.get(name).execution();
+		   	    System.out.println(this.MoteurRPN.returnRPN());
+	    	}
+	    	else {
+	    	  this.commandes.get(name).execution();
+	   	      System.out.println(this.MoteurRPN.returnRPN());
+	    	}
 	    }
 	  }
 
@@ -66,9 +72,20 @@ public class Calcul {
 	    this.MoteurRPN = moteurRPN;
 	    this.addCommand("undo", new undo(moteurRPN));
 	    this.addCommand("quit", new quit(moteurRPN));
-	    this.addCommand("result", new Afficher(moteurRPN));
-	    this.addCommand("save", new Enregistrer(moteurRPN, 0.0));
-	    this.addCommand("apply", new Appliquer(moteurRPN, Operation.PLUS));
+	    this.addCommand("afficher", new Afficher(moteurRPN));
+	    this.addCommand("appliquer+", new Appliquer(moteurRPN, Operation.PLUS));
+	    this.addCommand("appliquer-", new Appliquer(moteurRPN, Operation.MOINS));
+	    this.addCommand("appliquer*", new Appliquer(moteurRPN, Operation.MULT));
+	    this.addCommand("appliquer/", new Appliquer(moteurRPN, Operation.DIV));
+	  }
+	  
+	  /**
+	   * Commandes enregistrer
+	   * @param moteurRPN
+	   * @param val
+	   */
+	  public void createCommandEnregistre(MoteurRPN moteurRPN, double val) {
+		  this.addCommand("enregistrer", new Enregistrer(moteurRPN, val));
 	  }
 
 }

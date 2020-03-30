@@ -19,6 +19,7 @@ public class Afficher implements Command {
 	   * @return Collection de MoteurRPN
 	   */
 	  public Collection<Double> getCollection(){
+		  System.out.println("test");
 		    return this.moteurRPN.returnRPN();
 	 }
 

@@ -61,5 +61,13 @@ public class MoteurRPN extends Interpreteur{
     public Collection<Double> returnRPN() {
       return Collections.unmodifiableCollection(this.pile);
     }
+    
+    public void AfficherPileOperandes(){
+        Object[] arr=(pile.toArray());
+        System.out.print("(");
+        for (int j = 0; j < arr.length; j++) 
+            System.out.print(arr[j]+" "); 
+        System.out.println(")");
+      }
 
 }
