@@ -56,7 +56,7 @@ public class TestCalculatriceRPN {
 	        enregistre.setOperand(4);
 	        enregistre.execution();
 	        applique.execution();
-	        assertEquals(-3.2, moteurRPN.pile.pop(), 0);
+	        assertEquals(2.8, moteurRPN.pile.pop(), 0);
 	    }
 
 	    @Test
