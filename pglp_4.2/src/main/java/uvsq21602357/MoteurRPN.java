@@ -1,9 +1,10 @@
 package uvsq21602357;
 
 import java.util.Stack;
+import java.util.Collection;
+import java.util.Collections;
 
 public class MoteurRPN extends Interpreteur{
-private Stack<Double>pile;
     
     public MoteurRPN(){
         this.pile = new Stack();
@@ -46,12 +47,19 @@ private Stack<Double>pile;
     	return x;
     }
     
-    public void AfficherPileOperandes(){
+   /* public void AfficherPileOperandes(){
       Object[] arr=(pile.toArray());
       System.out.print("(");
       for (int j = 0; j < arr.length; j++) 
           System.out.print(arr[j]+" "); 
       System.out.println(")");
+    }*/
+    
+    /**
+     * @return Collection of pile of MoteurRPN
+     */
+    public Collection<Double> returnRPN() {
+      return Collections.unmodifiableCollection(this.pile);
     }
 
 }
