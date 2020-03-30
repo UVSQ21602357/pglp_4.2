@@ -2,15 +2,20 @@ package uvsq21602357;
 
 import java.util.Scanner;
 import java.util.regex.Pattern;
+import uvsq21602357.Calcul;
 
 public class SaisieRPN extends MoteurRPN {
+	private Calcul command;
+	private Scanner scanner;
 	
-	
-	public SaisieRPN() 
+	public SaisieRPN(MoteurRPN moteurRPN) 
     {   
-		int TMIN=-2147483648;
-		int TMAX=2147483647;
+		this.scanner = new Scanner(System.in,"UTF-8");
+		this.command = new Calcul();
+    	this.command.createCommandList(moteurRPN);
+    }
 		
+	 public void getInput(){
     	String str = "debut";
 		  int i = 0;
 		  while(i != 1)
@@ -25,49 +30,35 @@ public class SaisieRPN extends MoteurRPN {
 			  System.out.println("**Vous avez saisi : " + str);
 			  if(str.equals("Exit")) {i = 1;}
 			  else if(str.equals("+") || str.equals("PLUS")) 
-			  { 	try {
-			       double x = resOperation(Operation.PLUS);
-			       System.out.println(x);
-			  		}catch(DivisionZeroException d) {}
+			  { 	
+				  	this.command.setOperation(Operation.PLUS);
+			  		this.command.executerCommande("Calcul");
 			  }
 			  else if(str.equals("-") || str.equals("MOINS")) 
 			  {
-				  try {
-				  double x = resOperation(Operation.MOINS);
-			       System.out.println(x);
-			  		}catch(DivisionZeroException d) {}
+				  this.command.setOperation(Operation.MOINS);
+			      this.command.executerCommande("Calcul");
 			  }
 			  else if(str.equals("*") || str.equals("MULT")) 
 			  {
-				  try {
-				  double x = resOperation(Operation.MULT);
-			       System.out.println(x);
-			  		}catch(DivisionZeroException d) {}
+				  this.command.setOperation(Operation.MULT);
+			      this.command.executerCommande("Calcul");
 			  }
 			  else if(str.equals("/") || str.equals("DIV")) 
 			  {
-				  try {
-				  double x = resOperation(Operation.DIV);
-			       System.out.println(x);
-			  	}catch(DivisionZeroException d) {}
+				  this.command.setOperation(Operation.DIV);
+			      this.command.executerCommande("Calcul");
 			  }
 			  else if(str.matches("^-?\\d+$")){
-				  try {
-				  int x = Integer.parseInt(str);
-				  addOperande(x);
-				  System.out.println(x);
-				  }catch (NumberFormatException e) {
-					  System.out.println("Taille de l'op�rande incorrecte");
-				  }
+				  this.command.setOperande(Double.parseDouble(str));
+			      this.command.executerCommande("Enregistre");
 			  }
-			  else System.out.println("Entrez uniquement op�rande/op�ration");
+			  else {
+			      this.command.executerCommande(str);
+			    }
 			  
 		  }
              
       
-    }
-  
-       
-    
-
+    } 
 }
