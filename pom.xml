@@ -63,7 +63,7 @@
           </descriptorRefs>
           <archive>
             <manifest>
-              <mainClass>fr.uvsq.uvsq21600767.Compte</mainClass>
+              <mainClass>uvsq21602357.CalculatriceRPN</mainClass>
             </manifest>
           </archive>
         </configuration>
@@ -117,6 +117,14 @@
         <artifactId>spotbugs-maven-plugin</artifactId>
         <version>3.1.12.2</version>
       </plugin>
+       <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>3.1.1</version>
+                <configuration>
+                    <configLocation>checkstyle.xml</configLocation>
+                </configuration>
+       </plugin>       
     </plugins>
   </reporting>
 </project>
