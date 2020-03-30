@@ -62,7 +62,6 @@ public class SaisieRPN extends MoteurRPN {
 			  }
 			  else System.out.println("Entrez uniquement op�rande/op�ration");
 			  
-			  AfficherPileOperandes();
 		  }
              
       
